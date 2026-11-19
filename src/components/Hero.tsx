@@ -231,12 +231,12 @@ export default function Hero() {
               {/* Standalone Pure Photo */}
               <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden shadow-2xl border dark:border-white/10 border-neutral-200 bg-neutral-900">
                 <Image
-                  src="/images/umair-suit.jpg"
+                  src="/images/umair-new.jpg"
                   alt="Muhammad Umair — Full Stack Developer"
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 420px"
-                  className="object-cover object-[center_18%]"
+                  className="object-cover object-[center_15%]"
                 />
               </div>
 
