@@ -7,25 +7,33 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis for inertial butter-smooth scrolling
+    // Disable smooth scroll on touch devices to preserve native 120Hz touch momentum
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) {
+      return;
+    }
+
+    // Snappy, highly responsive, 60-120fps smooth scrolling for mouse wheels
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.75, // Snappy response instead of sluggish 1.15s+ delay
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.15, // Responsive natural scroll distance
+      touchMultiplier: 1.0,
+      syncTouch: false, // Do not hijack touch gestures
     });
 
     lenisRef.current = lenis;
 
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    const rafId = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // Make lenis available globally for programmatic anchor scrolling
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;

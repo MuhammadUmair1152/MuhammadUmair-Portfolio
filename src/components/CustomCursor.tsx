@@ -34,34 +34,26 @@ export default function CustomCursor() {
     const onDown = () => setClicking(true);
     const onUp = () => setClicking(false);
 
-    const onEnterInteractive = () => setHovering(true);
-    const onLeaveInteractive = () => setHovering(false);
-
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("mouseup", onUp);
-
-    // Track interactive elements
-    const addListeners = () => {
-      const els = document.querySelectorAll(
-        "a, button, [data-cursor-hover], input, textarea, select, label"
-      );
-      els.forEach((el) => {
-        el.addEventListener("mouseenter", onEnterInteractive);
-        el.addEventListener("mouseleave", onLeaveInteractive);
-      });
+    // High performance event delegation for hover states (zero MutationObserver overhead)
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("a, button, [data-cursor-hover], input, textarea, select, label")) {
+        setHovering(true);
+      } else {
+        setHovering(false);
+      }
     };
 
-    addListeners();
-    // Re-scan after dynamic renders
-    const obs = new MutationObserver(addListeners);
-    obs.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mousedown", onDown, { passive: true });
+    document.addEventListener("mouseup", onUp, { passive: true });
+    document.addEventListener("mouseover", onMouseOver, { passive: true });
 
     return () => {
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mousedown", onDown);
       document.removeEventListener("mouseup", onUp);
-      obs.disconnect();
+      document.removeEventListener("mouseover", onMouseOver);
     };
   }, [rawX, rawY, visible]);
 

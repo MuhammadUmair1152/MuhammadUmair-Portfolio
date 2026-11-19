@@ -80,11 +80,11 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-blue-600/30 selection:text-white transition-colors duration-300"
+        className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-blue-600/30 selection:text-white"
       >
         <ThemeProvider>
           <SmoothScroll>
-            <div className="relative min-h-screen w-full overflow-hidden bg-[var(--background)] bg-noise transition-colors duration-300">
+            <div className="relative min-h-screen w-full overflow-hidden bg-[var(--background)]">
               <ScrollProgressBar />
               <CustomCursor />
               <CommandPalette />

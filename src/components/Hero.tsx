@@ -248,7 +248,9 @@ export default function Hero() {
                 <div className="text-sm font-semibold text-blue-600 dark:text-blue-400 font-sans">
                   Full Stack Developer • PEC Registered Computer Engineer
                 </div>
-                
+                <div className="text-xs text-neutral-500 dark:text-neutral-400 font-mono-code">
+                  BS Computer Engineering • Scalable Web & AI Systems
+                </div>
               </div>
             </div>
           </motion.div>
