@@ -231,17 +231,17 @@ export default function Hero() {
               {/* Standalone Pure Photo */}
               <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden shadow-2xl border dark:border-white/10 border-neutral-200 bg-neutral-900">
                 <Image
-                  src="/images/umair-suit-professional.jpg"
-                  alt="Muhammad Umair"
+                  src="/images/umair-suit.jpg"
+                  alt="Muhammad Umair — Full Stack Developer"
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 420px"
-                  className="object-cover object-[center_18%] brightness-[1.04] contrast-[1.02]"
+                  className="object-cover object-[center_18%]"
                 />
               </div>
 
               {/* 3 Clean Titles directly beneath the picture */}
-              <div className="mt-4 pt-1 flex flex-col gap-1.5">
+              <div className="mt-4 pt-1 flex flex-col gap-1">
                 <h3 className="font-display text-2xl font-bold dark:text-white text-neutral-900 tracking-tight">
                   Muhammad Umair
                 </h3>
